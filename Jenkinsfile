@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+      sh '''
       docker build -t python-docker .
       docker run -d -p 3000:3000 python-docker
       '''     
