@@ -1,5 +1,6 @@
 pipeline {
   agent any
+
   environment {
     BUILD_TAG_SUFFIX = sh(script: 'echo $(date +%Y-%m-%d).$BUILD_NUMBER', returnStdout: true).trim()
     GIT_HASH = GIT_COMMIT.take(7)
