@@ -5,7 +5,9 @@ pipeline {
   }
   stages {
     stage('Build') {
+      steps {
       sh ' docker image ls '     
+      }
     }
   }
 }
