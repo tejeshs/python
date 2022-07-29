@@ -13,6 +13,8 @@ pipeline {
       aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPO
       docker build -t $ECR_REPO:$BUILD_TAG_SUFFIX-$GIT_HASH .
       docker push $ECR_REPO:$BUILD_TAG_SUFFIX-$GIT_HASH
+      kubectl create -f python.yaml
+      kubectl create -f pythonsvc.yaml
       '''     
       }
     }
