@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: python
+  name: python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python
+    spec:
+      containers:
+      - image: 349381632227.dkr.ecr.us-east-1.amazonaws.com/docker:2022-07-28.14-0a611ea
+        name: docker
+        resources: {}
+status: {}
