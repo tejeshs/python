@@ -4,7 +4,7 @@ pipeline {
   environment {
     BUILD_TAG_SUFFIX = sh(script: 'echo $(date +%Y-%m-%d).$BUILD_NUMBER', returnStdout: true).trim()
     GIT_HASH = GIT_COMMIT.take(7)
-    ECR_REPO = "349381632227.dkr.ecr.us-east-1.amazonaws.com/docker"
+    ECR_REPO = "*******.dkr.ecr.us-east-1.amazonaws.com/docker"
     EXAMPLE_CREDS = credentials('kubeconfig')
 
   }
