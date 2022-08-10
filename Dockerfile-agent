@@ -18,8 +18,4 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && chmod 700 get_helm.sh \
     && sh ./get_helm.sh
 
-# install go 1.17
-COPY --from=golang:1.17-alpine /usr/local/go/ /usr/local/go/
-ENV PATH="/usr/local/go/bin:${PATH}"
-
 ENTRYPOINT /bin/cat 
