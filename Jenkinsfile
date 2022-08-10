@@ -4,7 +4,7 @@ pipeline {
     BUILD_TAG_SUFFIX = sh(script: 'echo $(date +%Y-%m-%d).$BUILD_NUMBER', returnStdout: true).trim()
     GIT_HASH = GIT_COMMIT.take(7)
     ECR_REPO = credentials('docker')
-    EXAMPLE_CREDS = credentials('kubeconfig')
+    /*EXAMPLE_CREDS = credentials('kubeconfig')*/
 
   }
   stages {
