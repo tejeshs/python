@@ -9,7 +9,7 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle-1.16.312.zip" -o "awscl
 
 # kubectl
 RUN curl -LO https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl \
-    && chmod +x ./kubectl \firstjob_master
+    && chmod +x ./kubectl \firstjob_master \
     && mv ./kubectl /usr/local/bin
 
 
