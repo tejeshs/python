@@ -1,6 +1,25 @@
-FROM ubuntu:latest
-RUN apt update
-RUN apt install curl unzip -y
-RUN apt install docker.io -y
-RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && unzip awscliv2.zip &&  ./aws/install
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" && echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+FROM alpine:3.12
+
+RUN apk update \
+    && apk add docker unzip curl python2 make git openssh openssl
+
+# aws-cli
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle-1.16.312.zip" -o "awscli-bundle.zip" \
+    && unzip awscli-bundle.zip \
+    && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+# kubectl
+RUN curl -LO https://dl.k8s.io/release/v1.20.0/bin/linux/amd64/kubectl \
+    && chmod +x ./kubectl \
+    && mv ./kubectl /usr/local/bin
+
+# helm
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+    && chmod 700 get_helm.sh \
+    && sh ./get_helm.sh
+
+# install go 1.17
+COPY --from=golang:1.17-alpine /usr/local/go/ /usr/local/go/
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+ENTRYPOINT /bin/cat 
