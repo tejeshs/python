@@ -12,7 +12,7 @@ pipeline {
       steps {
       sh '''
       rm -rf ~/.kube/config
-      [ ! -d "~/.kube" ] && mkdir -p ~/.kube
+      [ ! -d -a "~/.kube" ] && mkdir -p ~/.kube
       cp $EXAMPLE_CREDS ~/.kube/config
       aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPO
       docker build -t $ECR_REPO:$BUILD_TAG_SUFFIX-$GIT_HASH .
