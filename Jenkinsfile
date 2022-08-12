@@ -18,7 +18,7 @@ pipeline {
       '''
       sh('sed -i \'s/BUILD_TAG_SUFFIX/$BUILD_TAG_SUFFIX/g\' python.yaml')
       sh('sed -i \'s/GIT_HASH/$GIT_HASH/g\' python.yaml')
-      sh('sed -i \'s/ECR_REPO/$ECR_REPO/g\' python.yaml')
+      sh("sed -i \'s/ECR_REPO/$ECR_REPO/g\' python.yaml")
       sh '''
       kubectl apply -f python.yaml
       kubectl apply -f pythonsvc.yaml
